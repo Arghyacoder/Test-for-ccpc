@@ -1,0 +1,63 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 41px;
+    background-color: #3aa1ff;
+}
+
+.menu{
+    padding: 10px;
+    width: 80%;
+}
+
+textarea,#editor{
+    background-color: rgb(233, 233, 233);
+    resize: none;
+    margin: 10px 0px 0px 0px;
+    border: none;
+    padding: 10px;
+}
+
+#editor:focus{
+    outline: none;
+}
+
+.preview{
+    background-color: rgb(212, 243, 255);
+    margin: 10px 10px;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding: 15px;
+}
+
+.text{
+    margin: 0px 10px;
+    width: 80%;
+    display: flex;
+}
+
+.but{
+    padding-left: 10px;
+}
+
+.but:hover{
+    background-color: rgb(255, 255, 255);
+    color: black;
+    cursor: pointer;
+}
+
+.info{
+    margin: 10px 0px;
+    border:black 1px solid;
+    height: 62%;
+    padding: 10px;
+    width: 40%;
+}
+

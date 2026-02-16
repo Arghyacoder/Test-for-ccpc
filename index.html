@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Notes App</title>
+</head>
+<body>
+    <div class="container">
+        <div class="menu">
+            <!-- <button onclick="loadNotes(index)" class="but">Open</button> -->
+            <button onclick="saveNote()" class="but">Save</button>
+            <button onclick="clearNote()" class="but">Clear ALL</button>
+        </div>
+        <div class="text">
+            <textarea id="editor" style="width: 745px; height: 510px;" placeholder="Write here!"></textarea>
+            <div class="preview" id="preview" style="width: 750px; height: 500px;"></div>
+            <div class="info">
+                <center>
+                    <h2><u>Simple notes app</u></h2>
+                </center>
+                <u>Markdown supported</u>
+                <ul>
+                    <li># Heading 1</li>
+                    <li>## Heading 2</li>
+                    <li>### Heading 3</li>
+                    <li>**Bold**</li>
+                    <li>*Italic*</li>
+                </ul>
+                <ul>
+                    <li>White box is where you write</li>
+                    <li>Blue box is where your note is previewed</li>
+                </ul>
+                <p>
+                    if you want to save your note, click "Save" and it will be downloaded as a text file. To clear the note, click "Clear ALL".
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+
+document.getElementById("editor").addEventListener("input", function() {
+    const text = this.value;
+    renderMarkdown(text);
+});
+
+// Simple Markdown parser
+
+function renderMarkdown(text) {
+    let html = text
+        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+        .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
+        .replace(/\*(.*)\*/gim, '<i>$1</i>')
+        .replace(/\n$/gim, '<br>');
+
+    document.getElementById("preview").innerHTML = html;
+}
+
+//Save note
+
+// function saveNote() {
+//     const text = document.getElementById("editor").value;
+//     localStorage.setItem("markdownNote", text);
+//     alert("Note saved!");
+// }
+
+
+
+// function openNote(index){
+//     let notes = JSON.parse(localStorage.getItem("notes"));
+//     let newWindow = window.open("", "_blank", "width=400,height=400");
+//     newWindow.document.write(notes[index]);
+// }
+
+// Clear note
+function clearNote() {
+    document.getElementById("editor").value = "";
+    document.getElementById("preview").innerHTML = "";
+    localStorage.removeItem("markdownNote");
+}
+
+// Export note
+function saveNote() {
+    const text = document.getElementById("editor").value;
+    const blob = new Blob([text], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "note.txt";
+    link.click();
+}
+</script>
+
+</html>
